@@ -60,7 +60,7 @@ public class Main {
                 sum_odd = sum_odd + arr[i];
             }
         }
-        return (sum_even - sum_odd);
+        return Math.abs(sum_even - sum_odd);
     } /// 3
 
     static boolean equalToAvg (double a, double b, double c, double d, double e) {
