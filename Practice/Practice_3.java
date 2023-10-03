@@ -2,10 +2,10 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class Main {
-    private static String s = "aaa abb bcc cdd dee eff";
+    private static String s = "aaa abb bcc cdd";
     public static void main(String[] args) {
-        System.out.println(replaceVowels());/// 1
-        System.out.println(stringTransform());/// 2
+//        System.out.println(replaceVowels());/// 1
+//        System.out.println(stringTransform());/// 2
         int[] shape = {10,10,2};
         int[] hole = {1,10};
         System.out.println(doesBlockFit(shape, hole));/// 3
@@ -61,7 +61,7 @@ public class Main {
             b = b / 10;
         }
         return ((a + sqrd_sum) % 2 == 0);
-    } /// 4 упрощено return
+    } /// 4 упростил return
 
     static int countRoots (int[] quad_arr) {
         int D = ((quad_arr[1] * quad_arr[1]) - 4 * quad_arr[0] * quad_arr[2]);
@@ -142,7 +142,7 @@ public class Main {
         return result;
     } /// 8
 
-    static String commonVowel() {
+/*    static String commonVowel() {
         int vowA = 0;
         int vowE = 0;
         int vowI = 0;
@@ -173,48 +173,35 @@ public class Main {
         else if (vowU > vowE && vowU > vowI && vowU > vowO && vowU > vowA)
             vowel = "U";
         return vowel;
-    } /// 9
+    } /// 9 */
+
+    static char commonVowel() {
+        String ss = s.toLowerCase();
+        String vowels = "aeiou";
+        char maxappearchar = ' ';
+        int counter = 0;
+        int[] charcnt = new int[Character.MAX_VALUE + 1];
+        for (int i = 0 ; i < ss.length() ; i++) {
+            char ch = ss.charAt(i);
+            charcnt[ch]++ ;
+            if  (vowels.contains(String.valueOf(ch)) && (charcnt[ch] >= counter)) {
+                counter = charcnt[ch];
+                maxappearchar = ch;
+            }
+        }
+        return maxappearchar;
+    } /// 9 оптимизирован
 
     static String dataScience(int[][] arrgh) {
-        int sum1 = 0;
-        int sum2 = 0;
-        int sum3 = 0;
-        int sum4 = 0;
-        int sum5 = 0;
-        for (int i = 0; i < arrgh.length; i++) {
-            sum1 += arrgh[i][0];
-            sum2 += arrgh[i][1];
-            sum3 += arrgh[i][2];
-            sum4 += arrgh[i][3];
-            sum5 += arrgh[i][4];
+        int[] replaced = new int[arrgh.length];
+        for (int[] ints : arrgh) {
+            for (int i = 0; i < arrgh.length; i++) {
+                replaced[i] += ints[i];
+            }
         }
-        int avv1 = sum1 / arrgh.length;
-        int avv2 = sum2 / arrgh.length;
-        int avv3 = sum3 / arrgh.length;
-        int avv4 = sum4 / arrgh.length;
-        int avv5 = sum5 / arrgh.length;
-        int[] replaced = {avv1, avv2, avv3, avv4, avv5};
-
-        int[][] new_arrgh = arrgh;
-        for (int j = 0; j < new_arrgh.length; j++){
-            if (j == 0)
-                new_arrgh[j][0] = avv1;
-            else if (j == 1)
-                new_arrgh[j][1] = avv2;
-            else if (j == 2)
-                new_arrgh[j][2] = avv3;
-            else if (j == 3)
-                new_arrgh[j][3] = avv4;
-            else if (j == 4)
-                new_arrgh[j][4] = avv5;
-            else
-                new_arrgh[j] = arrgh[j];
+        for (int j = 0; j < arrgh.length; j++) {
+            arrgh[j][j] = replaced[j] / arrgh.length;
         }
-        return Arrays.toString(new_arrgh[0]) + Arrays.toString(new_arrgh[1]) + Arrays.toString(new_arrgh[2]) + Arrays.toString(new_arrgh[3]) + Arrays.toString(new_arrgh[4]);
-
-    } /// 10
-
-
-
-
+        return Arrays.toString(arrgh[0]) + Arrays.toString(arrgh[1]) + Arrays.toString(arrgh[2]) + Arrays.toString(arrgh[3]) + Arrays.toString(arrgh[4]);
+    } /// 10 сократил
 }
