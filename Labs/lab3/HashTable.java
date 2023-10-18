@@ -49,9 +49,9 @@ public class HashTable {
         return orderNum % numOfBuckets; /// convert order number to bucket length == buckets.length
     }
     public void put(Integer orderNum, String clientInfo) {
-        if (orderNum == null || clientInfo == null) {
+/*        if (orderNum == null || clientInfo == null) {
             throw new IllegalArgumentException("orderNum or clientInfo is null");
-        }
+        }*/
         int bucketIndex = getBucketIndex(orderNum);
         HashNode head = buckets[bucketIndex];
         while (head != null) {
